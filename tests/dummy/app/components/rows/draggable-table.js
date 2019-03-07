@@ -35,6 +35,10 @@ export default Component.extend(TableCommon, {
 
   dropInfo: 'drop a Row here...',
 
+  onRowDrag(row){
+    return row.get('id');
+  },
+
   actions: {
     selectAll() {
       this.get('table.rows').setEach('selected', true);

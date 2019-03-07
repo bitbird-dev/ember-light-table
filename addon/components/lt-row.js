@@ -29,12 +29,12 @@ const Row = Component.extend({
 
   dragStart(event){
     let callback = this.get('dragCallback');
-    let rowId = this.get('row.id');
-    let payload = rowId;
+
     if(callback) {
-      payload = callback(rowId);
+      let row = this.get('row');
+      let payload = callback(row);
+      event.dataTransfer.setData('text/data', payload);
     }
-    event.dataTransfer.setData('text/data', payload);
   },
 });
 

@@ -455,6 +455,8 @@ export default Component.extend({
     run.cancel(this._debounceTimer);
   },
 
+  onRowDrag: null,
+
   actions: {
     /**
      * onRowClick action. Handles selection, and row expansion.
