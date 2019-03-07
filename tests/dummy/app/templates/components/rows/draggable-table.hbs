@@ -1,0 +1,40 @@
+{{!-- BEGIN-SNIPPET selectable-table --}}
+<div class="table-actions">
+  {{#if hasSelection}}
+    <div class="table-action fa fa-check-square-o" title="Deselect all" {{action 'deselectAll'}}></div>
+    <div class="table-action fa fa-trash-o delete" title="Delete selected" {{action 'deleteAll'}}></div>
+  {{else}}
+    <div class="table-action fa fa-square-o" title="Select all" {{action 'selectAll'}}></div>
+  {{/if}}
+</div>
+
+{{#light-table table height='65vh' as |t|}}
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconSortable='fa fa-sort'
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    fixed=true
+  }}
+
+  {{#t.body
+    multiSelect=true
+    canDrag=true
+    onScrolledToBottom=(action 'onScrolledToBottom')
+  as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+
+    {{#if (and (not isLoading) table.isEmpty)}}
+      {{#body.no-data}}
+        {{no-data}}
+      {{/body.no-data}}
+    {{/if}}
+  {{/t.body}}
+{{/light-table}}
+{{!-- END-SNIPPET --}}
+<div class="table-drop-target" ondrop={{action 'onDrop'}} ondragover={{action 'allowDrop'}}>{{dropInfo}}</div>

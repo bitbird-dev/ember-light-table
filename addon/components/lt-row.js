@@ -6,9 +6,9 @@ const Row = Component.extend({
   layout,
   tagName: 'tr',
   classNames: ['lt-row'],
-  classNameBindings: ['isSelected', 'isExpanded', 'canExpand:is-expandable', 'canSelect:is-selectable', 'row.classNames'],
-  attributeBindings: ['colspan', 'data-row-id'],
-
+  classNameBindings: ['isSelected', 'isExpanded', 'canExpand:is-expandable', 'canSelect:is-selectable','canDrag:is-draggable', 'row.classNames'],
+  attributeBindings: ['colspan', 'data-row-id', 'canDrag:draggable'], //ondragstart="drag(event)"
+  canDrag: false,
   columns: null,
   row: null,
   tableActions: null,
@@ -18,7 +18,24 @@ const Row = Component.extend({
   colspan: 1,
 
   isSelected: computed.readOnly('row.selected'),
-  isExpanded: computed.readOnly('row.expanded')
+  isExpanded: computed.readOnly('row.expanded'),
+
+  /**
+   * callback for setting custom drag payloads.
+   * signature should be "function(id)"
+   * @public
+   */
+  dragCallback: null,
+
+  dragStart(event){
+    let callback = this.get('dragCallback');
+    let rowId = this.get('row.id');
+    let payload = rowId;
+    if(callback) {
+      payload = callback(rowId);
+    }
+    event.dataTransfer.setData('text/data', payload);
+  },
 });
 
 Row.reopenClass({
