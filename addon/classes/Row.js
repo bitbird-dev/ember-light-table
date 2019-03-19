@@ -43,7 +43,37 @@ export default class Row extends ObjectProxy.extend({
    * @type {Boolean}
    * @default false
    */
-  selected: false,
+  _selectedInternal: false,
+
+  selectedAttributeName: null,
+
+  selected: computed('_selectedInternal','selectedAttributeName', 'content.isSelected', {
+    get(key) {
+      let attrName = this.get('selectedAttributeName');
+      if(attrName) {
+        let content = this.get('content');
+        if(content) {
+          return content.get(attrName);
+        }
+        else {
+          return false;
+        }
+      } else {
+        return this.get('_selectedInternal');
+      }
+    },
+    set(key, value) {
+      this.set('_selectedInternal', value);
+      let attrName = this.get('selectedAttributeName');
+      if(attrName) {
+        let content = this.get('content');
+        if(content) {
+          content.set(attrName, value);
+        }
+      }
+      return value;
+    }
+  }),
 
   /**
    * Class names to be applied to this row
@@ -92,6 +122,9 @@ export default class Row extends ObjectProxy.extend({
     //       https://travis-ci.org/offirgolan/ember-light-table/jobs/344818839#L790
     super(Object.assign({}, options, { content }));
 
+    if(options && options.selectedAttributeName){
+      this.set('selectedAttributeName', options.selectedAttributeName);
+    }
     if (content instanceof Row) {
       return content;
     }
