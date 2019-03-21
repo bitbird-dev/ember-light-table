@@ -37,7 +37,7 @@
                      canExpand=canExpand
                      canSelect=canSelect
                      canDrag=canDrag
-                     dragCallback=onRowDrag
+                     onDragStart=(action "onRowDragStart" row)
                      click=(action 'onRowClick' row)
                      doubleClick=(action 'onRowDoubleClick' row)}}
 
@@ -98,7 +98,7 @@
                      canExpand=canExpand
                      canSelect=canSelect
                      canDrag=canDrag
-                     dragCallback=onRowDrag
+                     onDragStart=(action "onRowDragStart" row)
                      click=(action 'onRowClick' row)
                      doubleClick=(action 'onRowDoubleClick' row)}}
           {{/vertical-collection}}

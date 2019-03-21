@@ -455,8 +455,6 @@ export default Component.extend({
     run.cancel(this._debounceTimer);
   },
 
-  onRowDrag: null,
-
   actions: {
     /**
      * onRowClick action. Handles selection, and row expansion.
@@ -561,6 +559,11 @@ export default Component.extend({
     lastReached(/* item, index, key */) {
       this.sendAction('lastReached', ...arguments);
       this.sendAction('onScrolledToBottom');
+    },
+    onRowDragStart(/*event, row*/){
+      if(this.onRowDragStart) {
+        this.onRowDragStart(...arguments);
+      }
     }
   }
 });

@@ -1,4 +1,4 @@
-// BEGIN-SNIPPET selectable-table
+// BEGIN-SNIPPET draggable-rows-table
 import Component from '@ember/component';
 import TableCommon from '../../mixins/table-common';
 import { computed } from '@ember/object';
@@ -35,9 +35,7 @@ export default Component.extend(TableCommon, {
 
   dropInfo: 'drop a Row here...',
 
-  onRowDrag(row){
-    return row.get('id');
-  },
+  
 
   actions: {
     selectAll() {
@@ -51,14 +49,16 @@ export default Component.extend(TableCommon, {
     deleteAll() {
       this.get('table').removeRows(this.get('table.selectedRows'));
     },
-
+    onRowDragStart(row, event){
+      let id = row.get('id');
+      event.dataTransfer.setData('text/data', id);
+    },
     onDrop(event) {
       event.preventDefault();
       let payload = event.dataTransfer.getData('text/data');
       //let rowData = JSON.parse(payload);
       this.set('dropInfo', `Dropped id = ${payload}.`);
     },
-
     allowDrop(event) {
       event.preventDefault();
     },

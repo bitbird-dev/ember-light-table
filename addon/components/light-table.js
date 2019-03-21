@@ -353,7 +353,7 @@ const LightTable = Component.extend({
      */
     onAfterResponsiveChange(/* matches */) {
       this.sendAction('onAfterResponsiveChange', ...arguments);
-    }
+    },
   }
 });
 

@@ -1,4 +1,4 @@
-{{!-- BEGIN-SNIPPET selectable-table --}}
+{{!-- BEGIN-SNIPPET draggable-rows-table --}}
 <div class="table-actions">
   {{#if hasSelection}}
     <div class="table-action fa fa-check-square-o" title="Deselect all" {{action 'deselectAll'}}></div>
@@ -20,7 +20,7 @@
   {{#t.body
     multiSelect=true
     canDrag=true
-    onRowDrag=onRowDrag
+    onRowDragStart=(action "onRowDragStart")
     onScrolledToBottom=(action 'onScrolledToBottom')
   as |body|
   }}
