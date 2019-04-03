@@ -19,8 +19,7 @@
 
   {{#t.body
     multiSelect=true
-    canDrag=true
-    onRowDragStart=(action "onRowDragStart")
+    rowComponent=(component 'draggable-row' onDragStart=(action "onRowDragStart"))
     onScrolledToBottom=(action 'onScrolledToBottom')
   as |body|
   }}

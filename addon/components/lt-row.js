@@ -6,9 +6,9 @@ const Row = Component.extend({
   layout,
   tagName: 'tr',
   classNames: ['lt-row'],
-  classNameBindings: ['isSelected', 'isExpanded', 'canExpand:is-expandable', 'canSelect:is-selectable','canDrag:is-draggable', 'row.classNames'],
-  attributeBindings: ['colspan', 'data-row-id', 'canDrag:draggable'],
-  canDrag: false,
+  classNameBindings: ['isSelected', 'isExpanded', 'canExpand:is-expandable', 'canSelect:is-selectable', 'row.classNames'],
+  attributeBindings: ['colspan', 'data-row-id'],
+
   columns: null,
   row: null,
   tableActions: null,
@@ -18,13 +18,7 @@ const Row = Component.extend({
   colspan: 1,
 
   isSelected: computed.readOnly('row.selected'),
-  isExpanded: computed.readOnly('row.expanded'),
-
-  dragStart(event){
-    if(this.onDragStart) {
-      this.onDragStart(event);
-    }
-  }
+  isExpanded: computed.readOnly('row.expanded')
 });
 
 Row.reopenClass({

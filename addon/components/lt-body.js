@@ -37,7 +37,7 @@ import Row from 'ember-light-table/classes/Row';
 export default Component.extend({
   layout,
   classNames: ['lt-body-wrap'],
-  classNameBindings: ['canSelect', 'multiSelect', 'canExpand', 'canDrag'],
+  classNameBindings: ['canSelect', 'multiSelect', 'canExpand'],
 
   /**
    * @property table
@@ -82,16 +82,6 @@ export default Component.extend({
    * @default true
    */
   canSelect: true,
-
-  /**
-   * Allows a user to drag a row. All this will do is apply the necessary
-   * CSS classes.
-   *
-   * @property canDrag
-   * @type {Boolean}
-   * @default false
-   */
-  canDrag: false,
 
   /**
    * Select a row on click. If this is set to `false` and multiSelect is
@@ -559,11 +549,6 @@ export default Component.extend({
     lastReached(/* item, index, key */) {
       this.sendAction('lastReached', ...arguments);
       this.sendAction('onScrolledToBottom');
-    },
-    onRowDragStart(/*event, row*/){
-      if(this.onRowDragStart) {
-        this.onRowDragStart(...arguments);
-      }
     }
   }
 });
