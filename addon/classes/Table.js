@@ -147,7 +147,7 @@ export default class Table extends EmberObject.extend({
    *           `createRow(content, options)`.
    */
   constructor(columns = [], rows = [], options = {}) {
-    super();
+    super(...arguments);
 
     assert('[ember-light-table] columns must be an array if defined', isArray(columns));
     assert('[ember-light-table] rows must be an array if defined', isArray(rows));
