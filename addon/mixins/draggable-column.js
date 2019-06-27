@@ -131,8 +131,6 @@ export default Mixin.create({
       e.preventDefault();
       e.stopPropagation();
 
-      table.notifyPropertyChange('columns');
-
       columns.removeObject(sourceColumn);
       columns.insertAt(targetColumnIdx, sourceColumn);
 
